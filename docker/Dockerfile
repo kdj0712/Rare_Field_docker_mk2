@@ -25,10 +25,17 @@ RUN git clone -b main https://github.com/kdj0712/rare_field_fastapis_mk2 ${APP_D
 # Changes the working directory to /apps/${REPO_NAME}. This uses the variable to dynamically set the directory path.
 WORKDIR /apps/${APP_DIR_NAME_FASTAPI}
 
-# requirements.txt 설치 전에 wheel 먼저 설치
-RUN pip install --no-cache-dir wheel
+# # requirements.txt 설치 전에 wheel 먼저 설치
+# RUN pip install --no-cache-dir wheel
 
-RUN pip install --no-cache-dir -r ./requirements.txt
+# RUN pip install --no-cache-dir -r ./requirements.txt
+# requirements.txt 설치 전에 wheel 먼저 설치
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir wheel
+
+# 이 명령을 나눠서 처리
+COPY ./requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
 # RUN rm -rf .git
 
