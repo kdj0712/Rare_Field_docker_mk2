@@ -1,0 +1,49 @@
+version: '3.9'
+
+services:
+  springboot_3.1.1_fastapi:
+    image: ${IMAGE_NAME}
+    build:
+      context: .
+      args:
+        APP_DIR_NAME_SPRINGBOOT: ${APP_DIR_NAME_SPRINGBOOT}
+        APP_DIR_NAME_FASTAPI: ${APP_DIR_NAME_FASTAPI}
+      dockerfile: ./Dockerfile
+    command:
+      - "jupyter"
+      - "lab"
+      - "--ip=0.0.0.0"
+      - "--port=8888"
+      - "--no-browser"
+      - "--allow-root"
+      - "--NotebookApp.token=''"
+      - "--NotebookApp.notebook_dir='/apps'"
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    ports:
+      - 8888:8888
+      - 8000:8000
+      - 8080:8080
+
+  db_mysql_8:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: teamkim
+      MYSQL_LOWER_CASE_TABLE_NAMES: 1
+      MYSQL_DATABASE: rarefield
+      MYSQL_USER: teamkimuser
+      MYSQL_PASSWORD: teamkimuser
+    ports:
+      - "3306:3306"
+    volumes:
+      - /mnt/block/mysql_data:/var/lib/mysql
+      - ./init_mysql.sql:/docker-entrypoint-initdb.d/init_mysql.sql
+
+  db_mongodb_7:
+    image: mongo:7
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - /mnt/block/mongo_data:/data/db
