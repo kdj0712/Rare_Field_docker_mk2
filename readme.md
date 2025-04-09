@@ -24,8 +24,7 @@
 ```
 ~$ sudo docker system prune
 
-~$ wget -O Rare_Field_docker.zip https://github.com/kdj0712/Rare_Field_docker/archive/refs/heads/main.zip
-~$ unzip Rare_Field_docker.zip
+~$ wget -O docker.zip https://github.com/kdj0712/Rare_Field_docker_mk2/raw/main/docker.zip
 ~$ unzip docker.zip -d docker_folder && cd ./docker_folder
 ~/docker_folder$ sudo docker-compose build --no-cache
 ~/docker_folder$ sudo docker-compose --project-name rare_field up -d
