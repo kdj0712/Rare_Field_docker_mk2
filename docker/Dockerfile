@@ -29,8 +29,7 @@ WORKDIR /apps/${APP_DIR_NAME_FASTAPI}
 # RUN pip install --no-cache-dir wheel
 
 # requirements.txt 설치 전에 wheel 먼저 설치
-RUN pip install --upgrade pip && \
-pip install --no-cache-dir wheel
+RUN pip install --upgrade pip setuptools wheel
 
 RUN pip install --no-cache-dir -r ./requirements.txt
 # RUN rm -rf .git
