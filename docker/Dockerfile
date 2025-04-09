@@ -28,15 +28,11 @@ WORKDIR /apps/${APP_DIR_NAME_FASTAPI}
 # # requirements.txt 설치 전에 wheel 먼저 설치
 # RUN pip install --no-cache-dir wheel
 
-# RUN pip install --no-cache-dir -r ./requirements.txt
 # requirements.txt 설치 전에 wheel 먼저 설치
 RUN pip install --upgrade pip && \
-    pip install --no-cache-dir wheel
+pip install --no-cache-dir wheel
 
-# 이 명령을 나눠서 처리
-COPY ./requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
-
+RUN pip install --no-cache-dir -r ./requirements.txt
 # RUN rm -rf .git
 
 # setup springboots
